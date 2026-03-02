@@ -328,7 +328,7 @@ function App(){
     bottomInner:{maxWidth:960,margin:'0 auto',display:'flex',justifyContent:'center',gap:6},
   };
 
-  const navItems=[{s:'home',i:'🏠',l:'HOME'},{s:'roadmap',i:'🗺️',l:'MAP'},{s:'phases',i:'⚔️',l:'QUESTS'},{s:'setup',i:'🛠️',l:'SETUP'},{s:'credits',i:'⭐',l:'CREDITS'}];
+  const navItems=[{s:'home',i:'🏠',l:'HOME'},{s:'roadmap',i:'🗺️',l:'MAP'},{s:'phases',i:'⚔️',l:'QUESTS'},{s:'youtube',i:'📺',l:'YOUTUBE'},{s:'setup',i:'🛠️',l:'SETUP'},{s:'credits',i:'⭐',l:'CREDITS'}];
 
   return React.createElement('div',{style:S.wrap},
     /* Stars */
@@ -372,6 +372,7 @@ function App(){
       screen==='home'&&React.createElement(HomeScreen,{ROADMAP,CHARS,c,char,setChar,done,xp,level,levelNames,nav,totalAll}),
       screen==='roadmap'&&React.createElement(RoadmapScreen,{ROADMAP,done,nav}),
       screen==='phases'&&React.createElement(PhasesScreen,{ROADMAP,activePh,setActivePh,activeTk,setActiveTk,activeStep,setActiveStep,done,earnXP,CHARS}),
+      screen==='youtube'&&React.createElement(YouTubeScreen,null),
       screen==='setup'&&React.createElement(SetupScreen,{ROADMAP,setupTool,setSetupTool}),
       screen==='credits'&&React.createElement(CreditsScreen,{totalAll,done,ROADMAP})
     ),
@@ -452,7 +453,7 @@ function HomeScreen({ROADMAP,CHARS,c,char,setChar,done,xp,level,levelNames,nav,t
     ),
     /* CTA Buttons */
     React.createElement('div',{style:{display:'flex',gap:10,justifyContent:'center',flexWrap:'wrap'}},
-      [{l:'⚔️ Start Quests',s:'phases',c:'#A29BFE'},{l:'🗺️ Full Roadmap',s:'roadmap',c:'#00C9FF'},{l:'🛠️ Setup Tools',s:'setup',c:'#FFD700'},{l:'⭐ Credits',s:'credits',c:'#FF6B6B'}].map(b=>
+      [{l:'⚔️ Start Quests',s:'phases',c:'#A29BFE'},{l:'🗺️ Full Roadmap',s:'roadmap',c:'#00C9FF'},{l:'📺 YouTube Courses',s:'youtube',c:'#FF6B6B'},{l:'🛠️ Setup Tools',s:'setup',c:'#FFD700'},{l:'⭐ Credits',s:'credits',c:'#FFD700'}].map(b=>
         React.createElement('button',{key:b.s,onClick:()=>nav(b.s),className:'btn-hover',
           style:{background:`${b.c}20`,border:`2px solid ${b.c}`,borderRadius:12,padding:'10px 16px',color:b.c,fontWeight:800,fontSize:12,cursor:'pointer'}},b.l)
       )
@@ -692,6 +693,231 @@ function CreditsScreen({totalAll,done,ROADMAP}){
       'BUILT WITH ❤️ IN BANGLADESH · FREE FOREVER · OPEN SOURCE SPIRIT',React.createElement('br',null),
       'DESIGNED FOR THE NEXT GENERATION OF AI ENGINEERS',React.createElement('br',null),
       '© 2024 MUSHFIQUL ALAM NASIF · BAUST · KHULNA, BANGLADESH 🇧🇩'
+    )
+  );
+}
+
+/* ─── YOUTUBE COURSES DATA ─── */
+const YT_COURSES = [
+  {
+    category: "🐍 Python & Programming",
+    color: "#3776AB",
+    icon: "🐍",
+    courses: [
+      { title: "Python Full Course for Beginners", channel: "Programming with Mosh", url: "https://www.youtube.com/watch?v=_uQrJ0TkZlc", duration: "6 hrs", rating: "⭐⭐⭐⭐⭐", level: "Beginner", desc: "The most-watched Python course ever. Clean teaching, real projects. 40M+ views. Start here.", views: "40M+ views", tag: "🏆 MOST POPULAR" },
+      { title: "Python Tutorial - Python Full Course", channel: "freeCodeCamp", url: "https://www.youtube.com/watch?v=rfscVS0vtbw", duration: "4.5 hrs", rating: "⭐⭐⭐⭐⭐", level: "Beginner", desc: "freeCodeCamp's comprehensive Python course. Projects-based. Trusted by millions.", views: "36M+ views", tag: "🔥 TRENDING" },
+      { title: "Python OOP Tutorial (6-part series)", channel: "Corey Schafer", url: "https://www.youtube.com/watch?v=ZDa-Z5JzLYM", duration: "1.5 hrs", rating: "⭐⭐⭐⭐⭐", level: "Intermediate", desc: "Best OOP tutorial on YouTube. Classes, inheritance, dunder methods — everything.", views: "3M+ views", tag: "💎 HIDDEN GEM" },
+      { title: "CS50P — Harvard Python (Full Course)", channel: "CS50", url: "https://www.youtube.com/watch?v=nLRL_NcnK-4", duration: "16 hrs", rating: "⭐⭐⭐⭐⭐", level: "Beginner–Inter", desc: "Harvard's official Python course. David Malan's legendary teaching. Certificate available free.", views: "4M+ views", tag: "🎓 UNIVERSITY" },
+      { title: "Intermediate Python Programming", channel: "Python Engineer", url: "https://www.youtube.com/watch?v=HGOBQPFzWKo", duration: "4 hrs", rating: "⭐⭐⭐⭐⭐", level: "Intermediate", desc: "Decorators, generators, context managers, threading. The Python skills pros use.", views: "2M+ views", tag: "⚡ MUST WATCH" },
+      { title: "Python for Data Science Full Course", channel: "Tech With Tim", url: "https://www.youtube.com/watch?v=LHBE6Q9XlzI", duration: "12 hrs", rating: "⭐⭐⭐⭐", level: "Intermediate", desc: "NumPy, Pandas, Matplotlib, Seaborn all in one course. Perfect for ML prep.", views: "1.5M+ views", tag: "📊 DATA FOCUS" }
+    ]
+  },
+  {
+    category: "🔢 Math for ML (Linear Algebra & Calculus)",
+    color: "#E74C3C",
+    icon: "🔢",
+    courses: [
+      { title: "Essence of Linear Algebra (Full Series)", channel: "3Blue1Brown", url: "https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2ZVzvjrLqNIxQC", duration: "4 hrs", rating: "⭐⭐⭐⭐⭐", level: "Beginner", desc: "THE best math course ever made. Visual, intuitive, beautiful. Changes how you see matrices forever. Watch before anything else.", views: "20M+ total views", tag: "🏆 BEST EVER MADE" },
+      { title: "Essence of Calculus (Full Series)", channel: "3Blue1Brown", url: "https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr", duration: "3 hrs", rating: "⭐⭐⭐⭐⭐", level: "Beginner", desc: "Calculus with visual intuition. Derivatives, integrals, chain rule — all clicking into place.", views: "15M+ total views", tag: "🎨 VISUAL GENIUS" },
+      { title: "MIT 18.06 Linear Algebra (Gilbert Strang)", channel: "MIT OpenCourseWare", url: "https://www.youtube.com/playlist?list=PL49CF3715CB9EF31D", duration: "35 hrs", rating: "⭐⭐⭐⭐⭐", level: "Intermediate", desc: "Prof Gilbert Strang's legendary MIT course. The gold standard of linear algebra education. Free university course.", views: "5M+ total views", tag: "🎓 MIT LEVEL" },
+      { title: "Statistics and Probability Full Course", channel: "Khan Academy", url: "https://www.youtube.com/playlist?list=PL1328115D3D8A2566", duration: "20 hrs", rating: "⭐⭐⭐⭐⭐", level: "Beginner", desc: "Khan Academy's complete stats course. Clear, paced perfectly, covers everything needed for ML.", views: "10M+ total views", tag: "📚 FOUNDATION" },
+      { title: "Neural Networks — The Math Behind", channel: "3Blue1Brown", url: "https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi", duration: "1 hr", rating: "⭐⭐⭐⭐⭐", level: "Intermediate", desc: "Backpropagation visualized mathematically. 4 videos that will change how you understand neural nets.", views: "12M+ total views", tag: "🧠 MIND BLOWN" },
+      { title: "Mathematics for Machine Learning", channel: "Imperial College London", url: "https://www.youtube.com/watch?v=T73ldK46JqE", duration: "8 hrs", rating: "⭐⭐⭐⭐", level: "Intermediate", desc: "University-level math for ML. Linear algebra + multivariate calculus + probability in ML context.", views: "500K+ views", tag: "🏛️ UNIVERSITY" }
+    ]
+  },
+  {
+    category: "🤖 Machine Learning",
+    color: "#27AE60",
+    icon: "🤖",
+    courses: [
+      { title: "Machine Learning Specialization (Andrew Ng)", channel: "DeepLearning.AI", url: "https://www.youtube.com/watch?v=vStJoetOxJg", duration: "20+ hrs", rating: "⭐⭐⭐⭐⭐", level: "Beginner", desc: "Andrew Ng is THE ML teacher. Clear, structured, industry-standard. The best starting point for any ML engineer. Coursera course previews on YouTube.", views: "10M+ views", tag: "🏆 WORLD'S BEST" },
+      { title: "StatQuest with Josh Starmer — ML Playlist", channel: "StatQuest", url: "https://www.youtube.com/playlist?list=PLblh5JKOoLUICTaGLRoHQDuF_7q2GfuJF", duration: "30+ hrs", rating: "⭐⭐⭐⭐⭐", level: "Beginner–Inter", desc: "Every ML algorithm explained with crystal-clear intuition. Decision trees, SVM, PCA, clustering — all perfect explanations.", views: "25M+ total views", tag: "💡 CLEAREST EVER" },
+      { title: "Machine Learning from Scratch (Python)", channel: "Python Engineer", url: "https://www.youtube.com/playlist?list=PLqnslRFeH2Upcrywf-u2etjdxxkL8nl7E", duration: "10 hrs", rating: "⭐⭐⭐⭐⭐", level: "Intermediate", desc: "Implement every ML algorithm from scratch: linear regression, SVM, KNN, neural nets. Best for deep understanding.", views: "2M+ total views", tag: "💻 CODE ALONG" },
+      { title: "Scikit-learn Crash Course", channel: "Nicholas Renotte", url: "https://www.youtube.com/watch?v=0B5eIE_1vpU", duration: "2 hrs", rating: "⭐⭐⭐⭐", level: "Beginner", desc: "Complete scikit-learn tutorial. Pipelines, cross-validation, hyperparameter tuning. Practical and fast.", views: "600K+ views", tag: "⚡ FAST TRACK" },
+      { title: "Hands-On Machine Learning — Book Companion", channel: "Aurélien Géron", url: "https://www.youtube.com/watch?v=zhUe5K5f-8M", duration: "Multiple", rating: "⭐⭐⭐⭐⭐", level: "Intermediate", desc: "Author of the famous O'Reilly book walks through key concepts. Practical ML at its best.", views: "1M+ views", tag: "📖 BOOK AUTHOR" },
+      { title: "XGBoost & LightGBM Complete Tutorial", channel: "Krish Naik", url: "https://www.youtube.com/watch?v=oRrKeUCEMXQ", duration: "2 hrs", rating: "⭐⭐⭐⭐", level: "Intermediate", desc: "Gradient boosting deep dive. XGBoost from scratch to Kaggle winning strategies. Essential for competitions.", views: "400K+ views", tag: "🏅 KAGGLE WIN" }
+    ]
+  },
+  {
+    category: "🧠 Deep Learning & Neural Networks",
+    color: "#E67E22",
+    icon: "🧠",
+    courses: [
+      { title: "Neural Networks: Zero to Hero (Karpathy)", channel: "Andrej Karpathy", url: "https://www.youtube.com/playlist?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ", duration: "25 hrs", rating: "⭐⭐⭐⭐⭐", level: "Intermediate", desc: "THE best deep learning course on YouTube. Karpathy builds GPT from scratch. You will never understand deep learning better anywhere else. MANDATORY WATCH.", views: "5M+ total views", tag: "🔱 GOAT LEVEL" },
+      { title: "Deep Learning Specialization — Lectures", channel: "DeepLearning.AI", url: "https://www.youtube.com/watch?v=CS4cs9xVecg", duration: "40+ hrs", rating: "⭐⭐⭐⭐⭐", level: "Intermediate", desc: "Andrew Ng's deep learning course. CNNs, RNNs, transformers, hyperparameter tuning. The definitive deep learning education.", views: "8M+ views", tag: "🎓 DEFINITIVE" },
+      { title: "PyTorch Full Course for Deep Learning", channel: "Daniel Bourke", url: "https://www.youtube.com/watch?v=Z_ikDlimN6A", duration: "25 hrs", rating: "⭐⭐⭐⭐⭐", level: "Beginner–Inter", desc: "The most practical PyTorch course. Build real projects. Daniel's teaching style is world-class. Companion to his book.", views: "2M+ views", tag: "💎 MASTERPIECE" },
+      { title: "fast.ai Practical Deep Learning", channel: "Jeremy Howard (fast.ai)", url: "https://www.youtube.com/playlist?list=PLfYUBJiXbdtSvpQjSnJJ_PmDQB_VyT5iU", duration: "20 hrs", rating: "⭐⭐⭐⭐⭐", level: "Beginner", desc: "Top-down approach. Get state-of-the-art results first, learn theory second. Jeremy Howard's legendary course. Free.", views: "3M+ total views", tag: "🚀 TOP-DOWN" },
+      { title: "MIT 6.S191 Introduction to Deep Learning", channel: "MIT", url: "https://www.youtube.com/playlist?list=PLtBw6njQRU-rwp5__7C0oIVt26ZgjG9NI", duration: "12 hrs", rating: "⭐⭐⭐⭐⭐", level: "Intermediate", desc: "MIT's official deep learning course. Cutting edge content. CNNs, RNNs, GANs, reinforcement learning. Updated yearly.", views: "2M+ total views", tag: "🏛️ MIT OFFICIAL" },
+      { title: "Backpropagation Explained (Series)", channel: "3Blue1Brown", url: "https://www.youtube.com/watch?v=Ilg3gGewQ5U", duration: "45 min", rating: "⭐⭐⭐⭐⭐", level: "Intermediate", desc: "The most beautiful explanation of backpropagation. 45 minutes that unlocks how ALL neural networks train.", views: "5M+ views", tag: "✨ 45 MIN MASTERCLASS" }
+    ]
+  },
+  {
+    category: "⚡ LLM Engineering & Transformers",
+    color: "#A29BFE",
+    icon: "⚡",
+    courses: [
+      { title: "Let's build GPT from scratch", channel: "Andrej Karpathy", url: "https://www.youtube.com/watch?v=kCc8FmEb1nY", duration: "2 hrs", rating: "⭐⭐⭐⭐⭐", level: "Advanced", desc: "2 hours. Karpathy builds a full GPT from scratch live. Every line of code explained. The single most valuable DL video ever made. Watch 3 times.", views: "4M+ views", tag: "🏆 #1 VIDEO EVER" },
+      { title: "Attention is All You Need — Paper Explained", channel: "Yannic Kilcher", url: "https://www.youtube.com/watch?v=iDulhoQ2pro", duration: "1.5 hrs", rating: "⭐⭐⭐⭐⭐", level: "Advanced", desc: "The original transformer paper explained in depth. Yannic's paper breakdowns are legendary. Deep, clear, rigorous.", views: "700K+ views", tag: "📄 PAPER BREAKDOWN" },
+      { title: "LangChain Full Course — Build LLM Apps", channel: "freeCodeCamp", url: "https://www.youtube.com/watch?v=lG7Uxts9SXs", duration: "4 hrs", rating: "⭐⭐⭐⭐⭐", level: "Intermediate", desc: "Build real LLM applications with LangChain. RAG, agents, chains, memory. Production patterns included.", views: "1.5M+ views", tag: "🛠️ BUILD APPS" },
+      { title: "RAG from Scratch — Full Course", channel: "LangChain", url: "https://www.youtube.com/playlist?list=PLfaIDFEXuae2LXbO1_PKyVJiQ23ZztA0x", duration: "6 hrs", rating: "⭐⭐⭐⭐⭐", level: "Intermediate", desc: "Official LangChain RAG course. Vector stores, retrieval, re-ranking, advanced RAG techniques. The definitive guide.", views: "500K+ total views", tag: "🔍 RAG MASTERY" },
+      { title: "Hugging Face Course — Transformers", channel: "Hugging Face", url: "https://www.youtube.com/playlist?list=PLo2EIpI_JMQvWfQndUesu0nPBAtZ9gP1o", duration: "10 hrs", rating: "⭐⭐⭐⭐⭐", level: "Intermediate", desc: "Official HuggingFace course. Fine-tuning BERT, GPT-2, T5. The best practical transformers resource.", views: "1M+ total views", tag: "🤗 OFFICIAL" },
+      { title: "Fine-tuning LLMs with QLoRA", channel: "1littlecoder", url: "https://www.youtube.com/watch?v=XpoKB3usmKc", duration: "1 hr", rating: "⭐⭐⭐⭐", level: "Advanced", desc: "QLoRA fine-tuning on consumer GPU. Run this on free Colab T4. Step-by-step. Real model, real results.", views: "300K+ views", tag: "💡 FREE GPU" }
+    ]
+  },
+  {
+    category: "🚀 MLOps & Production ML",
+    color: "#00B894",
+    icon: "🚀",
+    courses: [
+      { title: "MLOps Course — Full Beginner to Advanced", channel: "freeCodeCamp", url: "https://www.youtube.com/watch?v=-dJPoLm_gtE", duration: "6 hrs", rating: "⭐⭐⭐⭐⭐", level: "Intermediate", desc: "Complete MLOps course. MLflow, data versioning, CI/CD, deployment, monitoring. Production ML from day one.", views: "800K+ views", tag: "🏭 PRODUCTION" },
+      { title: "MLflow Tutorial for Beginners", channel: "Ken Jee", url: "https://www.youtube.com/watch?v=ksYIVDue8ak", duration: "1 hr", rating: "⭐⭐⭐⭐", level: "Beginner", desc: "MLflow experiment tracking from zero. Log params, metrics, models. Build a proper experiment registry.", views: "250K+ views", tag: "📊 TRACKING" },
+      { title: "Docker for ML Engineers", channel: "Weights & Biases", url: "https://www.youtube.com/watch?v=0qG_0CPB_bA", duration: "2 hrs", rating: "⭐⭐⭐⭐⭐", level: "Intermediate", desc: "Dockerize ML projects properly. GPU containers, reproducible environments, CI/CD. The right way to ship ML.", views: "400K+ views", tag: "🐳 CONTAINERIZE" },
+      { title: "FastAPI Complete Course", channel: "Sebastián Ramírez", url: "https://www.youtube.com/watch?v=0RS9W8MtZe4", duration: "3 hrs", rating: "⭐⭐⭐⭐⭐", level: "Intermediate", desc: "FastAPI creator teaches FastAPI. Pydantic, async, authentication, OpenAPI. The definitive source.", views: "900K+ views", tag: "⚡ BY CREATOR" },
+      { title: "GitHub Actions for ML CI/CD", channel: "Nicholas Renotte", url: "https://www.youtube.com/watch?v=R8_veQiYBjI", duration: "2 hrs", rating: "⭐⭐⭐⭐", level: "Intermediate", desc: "Automate ML training and deployment with GitHub Actions. Real workflow for real projects. Zero to hero.", views: "300K+ views", tag: "⚙️ AUTOMATION" },
+      { title: "Weights & Biases Crash Course", channel: "Weights & Biases", url: "https://www.youtube.com/watch?v=krS4mzYKMEM", duration: "1 hr", rating: "⭐⭐⭐⭐⭐", level: "Beginner", desc: "W&B tutorial by the company. Log everything, compare runs, visualize training. Free tier is very generous.", views: "200K+ views", tag: "📈 VISUALIZE" }
+    ]
+  },
+  {
+    category: "👁️ Computer Vision",
+    color: "#E17055",
+    icon: "👁️",
+    courses: [
+      { title: "OpenCV Python Full Course", channel: "freeCodeCamp", url: "https://www.youtube.com/watch?v=oXlwWbU8l2o", duration: "3 hrs", rating: "⭐⭐⭐⭐⭐", level: "Beginner", desc: "Complete OpenCV tutorial. Image processing, face detection, object tracking, video analysis. Practical projects.", views: "3M+ views", tag: "🎯 FOUNDATIONS" },
+      { title: "Deep Learning for Computer Vision", channel: "MIT OpenCourseWare", url: "https://www.youtube.com/playlist?list=PLtBw6njQRU-rwp5__7C0oIVt26ZgjG9NI", duration: "15 hrs", rating: "⭐⭐⭐⭐⭐", level: "Advanced", desc: "MIT's computer vision deep learning lectures. CNNs, attention for vision, self-supervised learning. Graduate level.", views: "1M+ views", tag: "🏛️ MIT GRAD" },
+      { title: "YOLOv8 Object Detection Full Tutorial", channel: "Nicolai Nielsen", url: "https://www.youtube.com/watch?v=m9fH9OWn8YM", duration: "3 hrs", rating: "⭐⭐⭐⭐⭐", level: "Intermediate", desc: "Train YOLOv8 on custom dataset. Annotation with Roboflow, training, evaluation, deployment. Real project.", views: "800K+ views", tag: "🎯 YOLO MASTER" },
+      { title: "PyTorch for Computer Vision", channel: "Daniel Bourke", url: "https://www.youtube.com/watch?v=V_xro1bcAuA", duration: "10 hrs", rating: "⭐⭐⭐⭐⭐", level: "Intermediate", desc: "CNN classification, transfer learning, data augmentation with PyTorch. The best practical CV course.", views: "1.2M+ views", tag: "💎 MUST WATCH" },
+      { title: "Stable Diffusion Complete Tutorial", channel: "Sebastian Kamph", url: "https://www.youtube.com/watch?v=DHaL56P6f5M", duration: "2 hrs", rating: "⭐⭐⭐⭐", level: "Intermediate", desc: "Generative AI for images. Stable Diffusion, ControlNet, fine-tuning on custom images. The future of CV.", views: "600K+ views", tag: "🎨 GENERATIVE AI" }
+    ]
+  },
+  {
+    category: "📝 NLP & Language Models",
+    color: "#FDCB6E",
+    icon: "📝",
+    courses: [
+      { title: "NLP with Python — Full Course", channel: "freeCodeCamp", url: "https://www.youtube.com/watch?v=X2vAabgKiuM", duration: "5 hrs", rating: "⭐⭐⭐⭐⭐", level: "Beginner", desc: "Complete NLP course. Text preprocessing, spaCy, NLTK, sentiment analysis, classification. Build real NLP apps.", views: "1.5M+ views", tag: "📚 COMPLETE NLP" },
+      { title: "Stanford CS224N — NLP with Deep Learning", channel: "Stanford Online", url: "https://www.youtube.com/playlist?list=PLoROMvodv4rMFqRtEuo6SGjY4XbRIVx76", duration: "35 hrs", rating: "⭐⭐⭐⭐⭐", level: "Advanced", desc: "Stanford's world-famous NLP course. Word vectors, RNNs, transformers, latest research. Free world-class education.", views: "3M+ total views", tag: "🎓 STANFORD" },
+      { title: "BERT Fine-tuning Tutorial", channel: "Abhishek Thakur", url: "https://www.youtube.com/watch?v=hinZO--TEk4", duration: "2 hrs", rating: "⭐⭐⭐⭐⭐", level: "Intermediate", desc: "Kaggle Grandmaster Abhishek fine-tunes BERT. Sentiment analysis, NER, QA tasks. Professional-grade code.", views: "500K+ views", tag: "🏅 KAGGLE GM" },
+      { title: "Transformers from Scratch", channel: "Andrej Karpathy", url: "https://www.youtube.com/watch?v=kCc8FmEb1nY", duration: "2 hrs", rating: "⭐⭐⭐⭐⭐", level: "Advanced", desc: "The GPT video again — because it IS the best transformers NLP tutorial. No substitute.", views: "4M+ views", tag: "🔱 LEGENDARY" },
+      { title: "Word Embeddings & Word2Vec Explained", channel: "StatQuest", url: "https://www.youtube.com/watch?v=viZrOnJclY0", duration: "20 min", rating: "⭐⭐⭐⭐⭐", level: "Beginner", desc: "Josh Starmer makes Word2Vec make sense in 20 minutes. The clearest NLP foundations explanation.", views: "400K+ views", tag: "💡 20 MIN CLARITY" }
+    ]
+  },
+  {
+    category: "🔬 AI Research & Paper Reading",
+    color: "#DDA0DD",
+    icon: "🔬",
+    courses: [
+      { title: "How to Read AI Research Papers", channel: "Andrew Ng", url: "https://www.youtube.com/watch?v=733m6qBH-jI", duration: "20 min", rating: "⭐⭐⭐⭐⭐", level: "All Levels", desc: "Andrew Ng teaches his exact method for reading research papers. The 3-pass method from the source. Essential.", views: "3M+ views", tag: "📄 READ PAPERS" },
+      { title: "Yannic Kilcher — ML Paper Breakdowns", channel: "Yannic Kilcher", url: "https://www.youtube.com/c/YannicKilcher", duration: "Ongoing", rating: "⭐⭐⭐⭐⭐", level: "Advanced", desc: "The best ML paper explanation channel. GPT-4, DALL-E, Stable Diffusion, Gemini — every major paper deeply explained.", views: "50M+ total views", tag: "🔭 PAPER MASTER" },
+      { title: "AI Explained — Readable Research", channel: "AI Explained", url: "https://www.youtube.com/c/AIsanity", duration: "Ongoing", rating: "⭐⭐⭐⭐⭐", level: "Intermediate", desc: "AI research made accessible. GPT progress, Claude, Gemini — state of the art explained without jargon.", views: "20M+ total views", tag: "🌍 ACCESSIBLE" },
+      { title: "Two Minute Papers", channel: "Two Minute Papers", url: "https://www.youtube.com/c/KárolyZsolnai-Fehér", duration: "Ongoing", rating: "⭐⭐⭐⭐⭐", level: "All Levels", desc: "New research every week in 2 minutes. Incredible for staying current with AI breakthroughs. 'What a time to be alive!'", views: "100M+ total views", tag: "⚡ STAY CURRENT" },
+      { title: "Lex Fridman — AI Researcher Interviews", channel: "Lex Fridman", url: "https://www.youtube.com/c/lexfridman", duration: "Ongoing", rating: "⭐⭐⭐⭐⭐", level: "All Levels", desc: "Deep interviews with Karpathy, Bengio, LeCun, Hinton, Sam Altman. Learn how the greatest AI minds think.", views: "500M+ total views", tag: "🎙️ LEGENDS SPEAK" }
+    ]
+  },
+  {
+    category: "🎯 Kaggle & Competitions",
+    color: "#20BEFF",
+    icon: "🎯",
+    courses: [
+      { title: "Kaggle Course — Intro to Machine Learning", channel: "Kaggle", url: "https://www.youtube.com/watch?v=I5AvQb3aV2c", duration: "3 hrs", rating: "⭐⭐⭐⭐⭐", level: "Beginner", desc: "Kaggle's own course. Decision trees, model validation, feature engineering. Get your first Kaggle submission.", views: "500K+ views", tag: "🏅 BY KAGGLE" },
+      { title: "How I Became a Kaggle Grandmaster", channel: "Abhishek Thakur", url: "https://www.youtube.com/watch?v=QGCvycOXs3M", duration: "1 hr", rating: "⭐⭐⭐⭐⭐", level: "Intermediate", desc: "World's first quadruple Kaggle Grandmaster shares exact workflow, feature engineering, ensemble strategies.", views: "1M+ views", tag: "🏆 GRANDMASTER" },
+      { title: "Winning Kaggle Competitions — Tips", channel: "Ken Jee", url: "https://www.youtube.com/watch?v=1GnRLJ5HKXc", duration: "1 hr", rating: "⭐⭐⭐⭐⭐", level: "Intermediate", desc: "Data science career advice + competition strategies from a top Kaggler. Realistic, actionable.", views: "800K+ views", tag: "💡 STRATEGY" },
+      { title: "EDA & Feature Engineering Masterclass", channel: "Krish Naik", url: "https://www.youtube.com/watch?v=t8pBb2y-U7g", duration: "4 hrs", rating: "⭐⭐⭐⭐", level: "Intermediate", desc: "Complete EDA and feature engineering tutorial. Pandas profiling, missing values, encoding strategies.", views: "600K+ views", tag: "🔍 EDA DEEP DIVE" }
+    ]
+  },
+  {
+    category: "🌟 Full ML/AI Career Channels",
+    color: "#FF6B6B",
+    icon: "🌟",
+    courses: [
+      { title: "Sentdex — Python & ML Channel", channel: "sentdex", url: "https://www.youtube.com/c/sentdex", duration: "Ongoing", rating: "⭐⭐⭐⭐⭐", level: "All Levels", desc: "1.3M subscribers. Python, ML, trading, neural nets, PyTorch. Hundreds of tutorials. One of the best channels ever.", views: "100M+ total views", tag: "🔥 1.3M SUBS" },
+      { title: "Krish Naik — Complete AI/ML Channel", channel: "Krish Naik", url: "https://www.youtube.com/user/krishnaik06", duration: "Ongoing", rating: "⭐⭐⭐⭐⭐", level: "Beginner–Advanced", desc: "800K+ subscribers. Python, ML, DL, NLP, CV, MLOps, GenAI. The most complete free AI curriculum channel.", views: "150M+ total views", tag: "📚 MOST COMPLETE" },
+      { title: "Nicholas Renotte — Applied AI", channel: "Nicholas Renotte", url: "https://www.youtube.com/c/NicholasRenotte", duration: "Ongoing", rating: "⭐⭐⭐⭐⭐", level: "Intermediate", desc: "Real-world AI projects. Face recognition, object detection, sign language detection with TF. Practical-first.", views: "30M+ total views", tag: "💻 REAL PROJECTS" },
+      { title: "Abhishek Thakur — Competition AI", channel: "Abhishek Thakur", url: "https://www.youtube.com/user/abhisheksvnit", duration: "Ongoing", rating: "⭐⭐⭐⭐⭐", level: "Advanced", desc: "World's #1 Kaggle GM shows his EXACT workflow live. AutoML, BERT fine-tuning, ensemble methods.", views: "10M+ total views", tag: "🥇 WORLD #1 KAGGLE" },
+      { title: "Daniel Bourke — ML Roadmap & Projects", channel: "Daniel Bourke", url: "https://www.youtube.com/c/mrdbourke", duration: "Ongoing", rating: "⭐⭐⭐⭐⭐", level: "Beginner–Inter", desc: "Clear ML roadmaps, PyTorch deep dives, career advice. His 'Zero to Mastery' approach is perfect for beginners.", views: "15M+ total views", tag: "🗺️ BEST ROADMAP" },
+      { title: "AssemblyAI — NLP & Audio AI", channel: "AssemblyAI", url: "https://www.youtube.com/c/AssemblyAI", duration: "Ongoing", rating: "⭐⭐⭐⭐⭐", level: "Intermediate", desc: "Cutting-edge NLP, speech recognition, audio AI. Built by working ML engineers. High quality, current.", views: "5M+ total views", tag: "🎤 AUDIO AI" }
+    ]
+  }
+];
+
+/* ─── YOUTUBE SCREEN COMPONENT ─── */
+function YouTubeScreen(){
+  const [activeCategory, setActiveCategory] = useState(0);
+  const [search, setSearch] = useState('');
+
+  const filtered = search.trim()
+    ? YT_COURSES.map(cat=>({...cat, courses: cat.courses.filter(c=>
+        c.title.toLowerCase().includes(search.toLowerCase()) ||
+        c.channel.toLowerCase().includes(search.toLowerCase()) ||
+        c.desc.toLowerCase().includes(search.toLowerCase())
+      )})).filter(cat=>cat.courses.length>0)
+    : YT_COURSES;
+
+  const tagColors = {'🏆 MOST POPULAR':'#FFD700','🔥 TRENDING':'#FF6B6B','💎 HIDDEN GEM':'#A29BFE','🎓 UNIVERSITY':'#00C9FF','⚡ MUST WATCH':'#FF8C00','📊 DATA FOCUS':'#27AE60','🏆 BEST EVER MADE':'#FFD700','🎨 VISUAL GENIUS':'#FD79A8','🎓 MIT LEVEL':'#00C9FF','📚 FOUNDATION':'#A29BFE','🧠 MIND BLOWN':'#E67E22','🏛️ UNIVERSITY':'#00C9FF','🏆 WORLD\'S BEST':'#FFD700','💡 CLEAREST EVER':'#FDCB6E','💻 CODE ALONG':'#3776AB','⚡ FAST TRACK':'#FF8C00','📖 BOOK AUTHOR':'#A29BFE','🏅 KAGGLE WIN':'#FFD700','🔱 GOAT LEVEL':'#FF6B6B','🎓 DEFINITIVE':'#00C9FF','💎 MASTERPIECE':'#A29BFE','🚀 TOP-DOWN':'#FF8C00','🏛️ MIT OFFICIAL':'#00C9FF','✨ 45 MIN MASTERCLASS':'#FFD700','🏆 #1 VIDEO EVER':'#FF6B6B','📄 PAPER BREAKDOWN':'#A29BFE','🛠️ BUILD APPS':'#00B894','🔍 RAG MASTERY':'#A29BFE','🤗 OFFICIAL':'#FFD700','💡 FREE GPU':'#27AE60','🏭 PRODUCTION':'#00B894','📊 TRACKING':'#3776AB','🐳 CONTAINERIZE':'#00C9FF','⚡ BY CREATOR':'#FF8C00','⚙️ AUTOMATION':'#A29BFE','📈 VISUALIZE':'#27AE60','🎯 FOUNDATIONS':'#E17055','🏛️ MIT GRAD':'#00C9FF','🎯 YOLO MASTER':'#E17055','💎 MUST WATCH':'#A29BFE','🎨 GENERATIVE AI':'#FD79A8','📚 COMPLETE NLP':'#FDCB6E','🎓 STANFORD':'#FFD700','🏅 KAGGLE GM':'#FFD700','🔱 LEGENDARY':'#FF6B6B','💡 20 MIN CLARITY':'#00C9FF','📄 READ PAPERS':'#A29BFE','🔭 PAPER MASTER':'#DDA0DD','🌍 ACCESSIBLE':'#00C9FF','⚡ STAY CURRENT':'#FF8C00','🎙️ LEGENDS SPEAK':'#FFD700','🏅 BY KAGGLE':'#20BEFF','🏆 GRANDMASTER':'#FFD700','💡 STRATEGY':'#A29BFE','🔍 EDA DEEP DIVE':'#00C9FF','🔥 1.3M SUBS':'#FF6B6B','📚 MOST COMPLETE':'#FFD700','💻 REAL PROJECTS':'#00B894','🥇 WORLD #1 KAGGLE':'#FFD700','🗺️ BEST ROADMAP':'#A29BFE','🎤 AUDIO AI':'#00C9FF'};
+
+  return React.createElement('div',{className:'f-bounceIn'},
+    /* Header */
+    React.createElement('div',{style:{textAlign:'center',marginBottom:22}},
+      React.createElement('div',{className:'f-float',style:{fontSize:56}},'📺'),
+      React.createElement('h2',{style:{fontFamily:"'Press Start 2P',monospace",fontSize:'clamp(10px,2.5vw,17px)',color:'#FF6B6B',margin:'10px 0 6px',textShadow:'0 0 20px #FF6B6B'}},'BEST FREE YOUTUBE COURSES'),
+      React.createElement('p',{style:{fontSize:12,color:'#A29BFE',marginBottom:14}},'Handpicked. Ranked. The absolute best for every AI/ML topic. 100% Free.'),
+      /* Search */
+      React.createElement('div',{style:{maxWidth:440,margin:'0 auto',position:'relative'}},
+        React.createElement('input',{
+          type:'text', placeholder:'🔍 Search courses, channels, topics...',
+          value:search, onChange:e=>setSearch(e.target.value),
+          style:{width:'100%',padding:'10px 16px',background:'rgba(255,255,255,0.07)',border:'2px solid rgba(162,155,254,0.3)',borderRadius:12,color:'#fff',fontSize:13,fontFamily:"'Nunito',sans-serif",outline:'none'}
+        })
+      )
+    ),
+    /* Category Pills (when not searching) */
+    !search&&React.createElement('div',{style:{display:'flex',gap:6,flexWrap:'wrap',marginBottom:18,justifyContent:'center'}},
+      filtered.map((cat,i)=>
+        React.createElement('button',{key:i,onClick:()=>setActiveCategory(i),className:'btn-hover',
+          style:{background:activeCategory===i?`${cat.color}30`:'rgba(255,255,255,0.05)',border:`2px solid ${activeCategory===i?cat.color:'rgba(255,255,255,0.1)'}`,borderRadius:20,padding:'5px 12px',color:activeCategory===i?cat.color:'#A29BFE',fontSize:11,fontWeight:700,cursor:'pointer',whiteSpace:'nowrap'}},
+          cat.icon+' '+cat.category.replace(cat.icon+' ','').split('&')[0].trim().split('(')[0].trim()
+        )
+      )
+    ),
+    /* Courses */
+    (search?filtered:[filtered[activeCategory]]).filter(Boolean).map((cat,ci)=>
+      React.createElement('div',{key:ci,style:{marginBottom:24}},
+        React.createElement('div',{style:{display:'flex',alignItems:'center',gap:10,marginBottom:14,background:`linear-gradient(90deg,${cat.color}20,transparent)`,border:`1px solid ${cat.color}40`,borderLeft:`4px solid ${cat.color}`,borderRadius:'0 12px 12px 0',padding:'10px 16px'}},
+          React.createElement('div',{style:{fontSize:28}},[cat.icon]),
+          React.createElement('div',null,
+            React.createElement('h3',{style:{fontSize:16,fontWeight:900,color:'#fff'}},[cat.category]),
+            React.createElement('p',{style:{fontSize:11,color:'#A29BFE'}},cat.courses.length+' curated courses')
+          )
+        ),
+        React.createElement('div',{style:{display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(280px,1fr))',gap:10}},
+          cat.courses.map((course,idx)=>{
+            const tagColor = tagColors[course.tag]||'#A29BFE';
+            return React.createElement('a',{key:idx,href:course.url,target:'_blank',rel:'noreferrer',style:{textDecoration:'none',display:'block'}},
+              React.createElement('div',{className:'card-hover',style:{background:'rgba(255,255,255,0.04)',border:`1px solid ${cat.color}30`,borderRadius:14,padding:'14px 16px',height:'100%',transition:'all 0.3s cubic-bezier(.34,1.56,.64,1)'}},
+                /* Tag */
+                React.createElement('div',{style:{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:8}},
+                  React.createElement('span',{style:{background:`${tagColor}20`,color:tagColor,fontSize:9,fontWeight:800,padding:'3px 8px',borderRadius:6,border:`1px solid ${tagColor}40`,fontFamily:"'Press Start 2P',monospace"}},course.tag),
+                  React.createElement('span',{style:{fontSize:10,color:'#6c5ce7',fontFamily:"'Press Start 2P',monospace"}},course.rating)
+                ),
+                /* Title */
+                React.createElement('h4',{style:{fontSize:13,fontWeight:900,color:'#fff',marginBottom:4,lineHeight:1.4}},course.title),
+                /* Channel */
+                React.createElement('div',{style:{display:'flex',gap:8,alignItems:'center',marginBottom:8}},
+                  React.createElement('span',{style:{background:'rgba(255,0,0,0.15)',border:'1px solid rgba(255,0,0,0.3)',borderRadius:5,padding:'2px 8px',fontSize:10,fontWeight:800,color:'#FF6B6B'}},'▶ '+course.channel),
+                  React.createElement('span',{style:{fontSize:10,color:'#6c5ce7'}},course.duration),
+                  React.createElement('span',{style:{background:`${cat.color}15`,color:cat.color,fontSize:9,padding:'2px 6px',borderRadius:5,fontWeight:700}},course.level)
+                ),
+                /* Desc */
+                React.createElement('p',{style:{fontSize:11,color:'#A29BFE',lineHeight:1.7,marginBottom:8}},course.desc),
+                /* Views + CTA */
+                React.createElement('div',{style:{display:'flex',justifyContent:'space-between',alignItems:'center'}},
+                  React.createElement('span',{style:{fontSize:10,color:'#6c5ce7'}},course.views),
+                  React.createElement('span',{style:{background:`${cat.color}25`,color:cat.color,fontSize:10,fontWeight:800,padding:'4px 10px',borderRadius:7,border:`1px solid ${cat.color}50`}},'Watch Free →')
+                )
+              )
+            );
+          })
+        )
+      )
     )
   );
 }
